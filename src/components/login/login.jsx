@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './login.module.css';
 
-// 개발툴 component 로 App, Login 에 authService 들어온 거 확인
-
 const Login = ({ authService }) => {
+  //로그인하면 메이커화면으로 넘어가는 것 구현
+  // 로그인되면 const에 gotomaker maker화면으로 갈 수 있도록
+  // 화면에서 다른 라우터로 갈 때는 히스토리 사용
+  const history = useHistory();
+  const goToMaker = userId => {
+    history.push({
+      pathname: '/maker',
+      state: { id: userId },
+    });
+  };
+
   const onLogin = event => {
     authService //
       .login(event.currentTarget.textContent) //
-      .then(console.log);
+      .then(data => goToMaker(data.user.uid));
   };
+
+  useEffect(() => {
+    authService.onAuthChange(user => {
+      user && goToMaker(user.uid);
+    });
+  });
+
   return (
     <section className={styles.login}>
       <Header />
