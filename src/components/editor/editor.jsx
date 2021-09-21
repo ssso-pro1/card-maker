@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from '../card/card';
 import CardEditForm from '../card_edit/card_edit_form';
 import CardAddForm from '../card_add/card_add_form';
 import styles from './editor.module.css';

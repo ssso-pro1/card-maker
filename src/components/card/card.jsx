@@ -4,7 +4,6 @@ import styles from './card.module.css';
 const DEFAULT_IMAGE = '/images/default_logo.png';
 
 const Card = ({ card }) => {
-  // 카드 안의 모든 정보들 전달
   const { name, company, title, email, message, theme, fileName, fileURL } = card;
   const url = fileURL || DEFAULT_IMAGE;
   return (

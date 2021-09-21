@@ -7,9 +7,6 @@ import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
 const Maker = ({ authService }) => {
-  //성능개선 위해 수정! 배열대신 오브젝트로
-  // 키는 card 의 id이고 이 자체가 card의 오브젝트가 됨
-  // -> 배열로 작성한 곳 다 수정 필요
   const [cards, setCards] = useState({
     1: {
       id: '1',
