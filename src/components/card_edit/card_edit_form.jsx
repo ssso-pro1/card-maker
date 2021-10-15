@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import Button from '../button/button';
 import styles from './card_edit_form.module.css';
-// import ImageFileInput from '../image_file_input/image_file_input';
 
 const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
   const nameRef = useRef();
@@ -24,7 +23,6 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
   } = card;
 
   const onFileChange = file => {
-    //updateCard 호출하면서 기존 card그대로 하면서, 바뀐 이름, url업뎃
     updateCard({
       ...card,
       fileName: file.name,
@@ -100,7 +98,6 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
         value={message}
       />
       <div className={styles.fileInput}>
-        {/* <ImageFileInput /> */}
         <FileInput name={fileName} onFileChange={onFileChange} />
       </div>
       <Button name='Delete' onClick={onSubmit} />
