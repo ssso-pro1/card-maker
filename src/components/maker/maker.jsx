@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import Editor from '../editor/editor';
 import Footer from '../footer/footer';
 import Header from '../header/header';
+import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
-const Maker = ({ authService }) => {
+const Maker = ({ FileInput, authService }) => {
   const [cards, setCards] = useState({
     1: {
       id: '1',
@@ -57,7 +57,12 @@ const Maker = ({ authService }) => {
     });
   });
 
+  // add & update
   const createOrUpdateCard = card => {
+    //console.log(card);
+    // const updated = [...cards, card];
+    // setCards(updated);
+
     setCards(cards => {
       const updated = { ...cards };
       updated[card.id] = card;
@@ -65,10 +70,8 @@ const Maker = ({ authService }) => {
     });
   };
 
+  //editform에서 클릭된 card를 받아오면 함수호출?
   const deleteCard = card => {
-    // const updated = [...cards, card];
-    // setCards(updated);
-
     setCards(cards => {
       const updated = { ...cards };
       delete updated[card.id];
@@ -81,6 +84,7 @@ const Maker = ({ authService }) => {
       <Header onLogout={onLogout} />
       <div className={styles.container}>
         <Editor
+          FileInput={FileInput}
           cards={cards}
           addCard={createOrUpdateCard}
           updateCard={createOrUpdateCard}

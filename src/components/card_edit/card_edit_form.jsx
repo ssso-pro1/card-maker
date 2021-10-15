@@ -1,19 +1,36 @@
 import React, { useRef } from 'react';
 import Button from '../button/button';
-import ImageFileInput from '../image_file_input/image_file_input';
 import styles from './card_edit_form.module.css';
+// import ImageFileInput from '../image_file_input/image_file_input';
 
-const CardEditForm = ({ card, updateCard, deleteCard }) => {
-  const { name, company, title, email, message, theme, fileName, fileURL } = card;
-
-  // onChange 함수에서 event.currentTarget 요소에 있는 name값을 이용해서
-  // 카드 안의 해당 키/값 쌍을 업뎃해주기 때문에 지워도 된다
+const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
   const nameRef = useRef();
   const companyRef = useRef();
   const themeRef = useRef();
   const titleRef = useRef();
   const emailRef = useRef();
   const messageRef = useRef();
+
+  const {
+    //
+    name,
+    company,
+    title,
+    email,
+    message,
+    theme,
+    fileName,
+    fileURL,
+  } = card;
+
+  const onFileChange = file => {
+    //updateCard 호출하면서 기존 card그대로 하면서, 바뀐 이름, url업뎃
+    updateCard({
+      ...card,
+      fileName: file.name,
+      fileURL: file.url,
+    });
+  };
 
   const onChange = event => {
     if (event.currentTarget == null) {
@@ -83,7 +100,8 @@ const CardEditForm = ({ card, updateCard, deleteCard }) => {
         value={message}
       />
       <div className={styles.fileInput}>
-        <ImageFileInput />
+        {/* <ImageFileInput /> */}
+        <FileInput name={fileName} onFileChange={onFileChange} />
       </div>
       <Button name='Delete' onClick={onSubmit} />
     </form>
